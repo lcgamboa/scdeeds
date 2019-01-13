@@ -1,0 +1,190 @@
+<window1>
+  <Class type="String">CPWindow</Class>
+  <Name type="String">window1</Name>
+  <Tag type="int">0</Tag>
+  <X type="int">334</X>
+  <Y type="int">157</Y>
+  <Width type="uint">885</Width>
+  <Height type="uint">560</Height>
+  <Hint type="String"></Hint>
+  <Enable type="bool">1</Enable>
+  <Visible type="bool">1</Visible>
+  <Color type="String">#000001</Color>
+  <PopupMenu type="PopupMenu">NULL</PopupMenu>
+  <EvMouseMove type="Event">FALSE</EvMouseMove>
+  <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>
+  <EvMouseButtonRelease type="Event">FALSE</EvMouseButtonRelease>
+  <EvMouseButtonClick type="Event">FALSE</EvMouseButtonClick>
+  <EvMouseButtonDoubleClick type="Event">FALSE</EvMouseButtonDoubleClick>
+  <EvKeyboardPress type="Event">FALSE</EvKeyboardPress>
+  <EvKeyboardRelease type="Event">FALSE</EvKeyboardRelease>
+  <EvOnDraw type="Event">FALSE</EvOnDraw>
+  <EvOnFocusIn type="Event">FALSE</EvOnFocusIn>
+  <EvOnFocusOut type="Event">FALSE</EvOnFocusOut>
+  <Title type="String">SCDeeds</Title>
+  <OverrideRedirect type="bool">0</OverrideRedirect>
+  <EvOnCreate type="Event">TRUE</EvOnCreate>
+  <EvOnDestroy type="Event">FALSE</EvOnDestroy>
+  <EvOnShow type="Event">TRUE</EvOnShow>
+  <EvOnHide type="Event">FALSE</EvOnHide>
+  <EvOnEnter type="Event">FALSE</EvOnEnter>
+  <EvOnLeave type="Event">FALSE</EvOnLeave>
+<menu1>
+  <Class type="String">CMenu</Class>
+  <Name type="String">menu1</Name>
+  <Tag type="int">0</Tag>
+  <MenuItems type="MenuItems">File,Edit,Build,Help,</MenuItems>
+</menu1>
+<styledtext1>
+  <Class type="String">CStyledText</Class>
+  <Name type="String">styledtext1</Name>
+  <Tag type="int">0</Tag>
+  <X type="int">5</X>
+  <Y type="int">5</Y>
+  <Width type="uint">864</Width>
+  <Height type="uint">512</Height>
+  <Hint type="String"></Hint>
+  <Enable type="bool">1</Enable>
+  <Visible type="bool">1</Visible>
+  <Color type="String">#000001</Color>
+  <PopupMenu type="PopupMenu">NULL</PopupMenu>
+  <EvMouseMove type="Event">FALSE</EvMouseMove>
+  <EvMouseButtonPress type="Event">FALSE</EvMouseButtonPress>
+  <EvMouseButtonRelease type="Event">FALSE</EvMouseButtonRelease>
+  <EvMouseButtonClick type="Event">FALSE</EvMouseButtonClick>
+  <EvMouseButtonDoubleClick type="Event">FALSE</EvMouseButtonDoubleClick>
+  <EvKeyboardPress type="Event">FALSE</EvKeyboardPress>
+  <EvKeyboardRelease type="Event">FALSE</EvKeyboardRelease>
+  <EvOnDraw type="Event">FALSE</EvOnDraw>
+  <EvOnFocusIn type="Event">FALSE</EvOnFocusIn>
+  <EvOnFocusOut type="Event">FALSE</EvOnFocusOut>
+  <ReadOnly type="int">0</ReadOnly>
+</styledtext1>
+<menu1_File>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_File</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">File</Text>
+  <MenuItems type="MenuItems">New,Open,Save,SaveAs,Exit,</MenuItems>
+</menu1_File>
+<menu1_Edit>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Edit</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Edit</Text>
+  <MenuItems type="MenuItems"></MenuItems>
+</menu1_Edit>
+<menu1_Build>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Build</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Build</Text>
+  <MenuItems type="MenuItems">Compile,Run in Deeds,</MenuItems>
+</menu1_Build>
+<menu1_Help>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Help</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Help</Text>
+  <MenuItems type="MenuItems">Contents,Examples,About,</MenuItems>
+</menu1_Help>
+<menu1_File_New>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_New</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">New</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_New>
+<menu1_File_Open>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Open</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Open</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Open>
+<menu1_File_Save>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Save</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Save</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Save>
+<menu1_File_SaveAs>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_SaveAs</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">SaveAs</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_SaveAs>
+<menu1_File_Exit>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_File_Exit</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Exit</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_File_Exit>
+<menu1_Build_Compile>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Build_Compile</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Compile</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Build_Compile>
+<menu1_Build_RuninDeeds>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Build_RuninDeeds</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Run in Deeds</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Build_RuninDeeds>
+<menu1_Help_Contents>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_Contents</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Contents</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_Contents>
+<menu1_Help_Examples>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_Examples</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Examples</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_Examples>
+<menu1_Help_About>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Help_About</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">About</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Help_About>
+<filedialog1>
+  <Class type="String">CFileDialog</Class>
+  <Name type="String">filedialog1</Name>
+  <Tag type="int">0</Tag>
+  <FileName type="String">untitled.c</FileName>
+  <Filter type="String">Smallc Files (*.c;*.h)|*.c;*.C;*.h;*.H</Filter>
+  <Type type="int">129</Type>
+  <EvOnClose type="Event">TRUE</EvOnClose>
+</filedialog1>
+</window1>
