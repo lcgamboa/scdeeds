@@ -17,20 +17,21 @@ CPWindow1::CPWindow1(void)
   SetTitle(wxT("SCDeeds"));
   SetOverrideRedirect(0);
   EvOnCreate=EVONCREATE & CPWindow1::_EvOnCreate;
+  EvOnDestroy=EVONDESTROY & CPWindow1::_EvOnDestroy;
   EvOnShow=EVONSHOW & CPWindow1::_EvOnShow;
   //menu1
   menu1.SetFOwner(this);
   menu1.SetClass(wxT("CMenu"));
   menu1.SetName(wxT("menu1"));
   menu1.SetTag(0);
-  menu1.SetMenuItems(wxT("File,Edit,Build,Help,"));
+  menu1.SetMenuItems(wxT("File,Edit,Build,Options,Help,"));
   CreateChild(&menu1);
   //styledtext1
   styledtext1.SetFOwner(this);
   styledtext1.SetClass(wxT("CStyledText"));
   styledtext1.SetName(wxT("styledtext1"));
   styledtext1.SetTag(0);
-  styledtext1.SetX(5);
+  styledtext1.SetX(6);
   styledtext1.SetY(5);
   styledtext1.SetWidth(864);
   styledtext1.SetHeight(512);
@@ -65,6 +66,14 @@ CPWindow1::CPWindow1(void)
   menu1_Build.SetText(wxT("Build"));
   menu1_Build.SetMenuItems(wxT("Compile,Run in Deeds,"));
   menu1.CreateChild(&menu1_Build);
+  //menu1_Options
+  menu1_Options.SetFOwner(this);
+  menu1_Options.SetClass(wxT("CPMenu"));
+  menu1_Options.SetName(wxT("menu1_Options"));
+  menu1_Options.SetTag(0);
+  menu1_Options.SetText(wxT("Options"));
+  menu1_Options.SetMenuItems(wxT("McE Path,"));
+  menu1.CreateChild(&menu1_Options);
   //menu1_Help
   menu1_Help.SetFOwner(this);
   menu1_Help.SetClass(wxT("CPMenu"));
@@ -143,6 +152,16 @@ CPWindow1::CPWindow1(void)
   menu1_Build_RuninDeeds.SetSubMenu(NULL);
   menu1_Build_RuninDeeds.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Build_RuninDeeds_EvMenuActive;
   menu1_Build.CreateChild(&menu1_Build_RuninDeeds);
+  //menu1_Options_McEPath
+  menu1_Options_McEPath.SetFOwner(this);
+  menu1_Options_McEPath.SetClass(wxT("CItemMenu"));
+  menu1_Options_McEPath.SetName(wxT("menu1_Options_McEPath"));
+  menu1_Options_McEPath.SetTag(0);
+  menu1_Options_McEPath.SetText(wxT("McE Path"));
+  menu1_Options_McEPath.SetEnable(1);
+  menu1_Options_McEPath.SetSubMenu(NULL);
+  menu1_Options_McEPath.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Options_McEPath_EvMenuActive;
+  menu1_Options.CreateChild(&menu1_Options_McEPath);
   //menu1_Help_Contents
   menu1_Help_Contents.SetFOwner(this);
   menu1_Help_Contents.SetClass(wxT("CItemMenu"));
@@ -152,7 +171,7 @@ CPWindow1::CPWindow1(void)
   menu1_Help_Contents.SetEnable(1);
   menu1_Help_Contents.SetSubMenu(NULL);
   menu1_Help_Contents.EvMenuActive=EVMENUACTIVE & CPWindow1::menu1_Help_Contents_EvMenuActive;
-  menu1_Help.CreateChild(&menu1_Help_Contents);
+  //menu1_Help.CreateChild(&menu1_Help_Contents);
   //menu1_Help_Examples
   menu1_Help_Examples.SetFOwner(this);
   menu1_Help_Examples.SetClass(wxT("CItemMenu"));
@@ -185,4 +204,6 @@ CPWindow1::CPWindow1(void)
   CreateChild(&filedialog1);
   /*#Others*/
 //lxrad automatic generated block end, don't edit above!
+  OFilter=lxT("");
+  OFilename=lxT("");
 };

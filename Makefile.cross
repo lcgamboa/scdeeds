@@ -1,0 +1,26 @@
+CC = x86_64-w64-mingw32-g++
+
+#lxrad automatic generated block start, don't edit below!
+
+FLAGS = -D_VERSION_=\"0.1\" -D_WIN_ -Wall -O2 `x86_64-w64-mingw32-msw-unicode-3.1  --cxxflags` -I/usr/include/lxrad 
+
+LIBS = `x86_64-w64-mingw32-msw-unicode-3.1  --libs std,stc` -llxrad 
+
+OBJS = pscdeeds.o scdeeds1.o  
+
+#lxrad automatic generated block end, don't edit above!
+
+
+all: $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o scdeeds.exe $(LIBS)
+	mv scdeeds.exe win64/
+%.o: %.cc
+	$(CC) -c $(FLAGS) $< 
+
+run: all
+	./scdeeds.exe
+
+install:
+
+clean:
+	rm -f scdeeds.exe *.o core

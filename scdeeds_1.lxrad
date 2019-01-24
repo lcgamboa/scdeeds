@@ -24,7 +24,7 @@
   <Title type="String">SCDeeds</Title>
   <OverrideRedirect type="bool">0</OverrideRedirect>
   <EvOnCreate type="Event">TRUE</EvOnCreate>
-  <EvOnDestroy type="Event">FALSE</EvOnDestroy>
+  <EvOnDestroy type="Event">TRUE</EvOnDestroy>
   <EvOnShow type="Event">TRUE</EvOnShow>
   <EvOnHide type="Event">FALSE</EvOnHide>
   <EvOnEnter type="Event">FALSE</EvOnEnter>
@@ -33,13 +33,13 @@
   <Class type="String">CMenu</Class>
   <Name type="String">menu1</Name>
   <Tag type="int">0</Tag>
-  <MenuItems type="MenuItems">File,Edit,Build,Help,</MenuItems>
+  <MenuItems type="MenuItems">File,Edit,Build,Options,Help,</MenuItems>
 </menu1>
 <styledtext1>
   <Class type="String">CStyledText</Class>
   <Name type="String">styledtext1</Name>
   <Tag type="int">0</Tag>
-  <X type="int">5</X>
+  <X type="int">6</X>
   <Y type="int">5</Y>
   <Width type="uint">864</Width>
   <Height type="uint">512</Height>
@@ -81,6 +81,13 @@
   <Text type="String">Build</Text>
   <MenuItems type="MenuItems">Compile,Run in Deeds,</MenuItems>
 </menu1_Build>
+<menu1_Options>
+  <Class type="String">CPMenu</Class>
+  <Name type="String">menu1_Options</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">Options</Text>
+  <MenuItems type="MenuItems">McE Path,</MenuItems>
+</menu1_Options>
 <menu1_Help>
   <Class type="String">CPMenu</Class>
   <Name type="String">menu1_Help</Name>
@@ -151,6 +158,15 @@
   <SubMenu type="SubMenu">NULL</SubMenu>
   <EvMenuActive type="Event">TRUE</EvMenuActive>
 </menu1_Build_RuninDeeds>
+<menu1_Options_McEPath>
+  <Class type="String">CItemMenu</Class>
+  <Name type="String">menu1_Options_McEPath</Name>
+  <Tag type="int">0</Tag>
+  <Text type="String">McE Path</Text>
+  <Enable type="bool">1</Enable>
+  <SubMenu type="SubMenu">NULL</SubMenu>
+  <EvMenuActive type="Event">TRUE</EvMenuActive>
+</menu1_Options_McEPath>
 <menu1_Help_Contents>
   <Class type="String">CItemMenu</Class>
   <Name type="String">menu1_Help_Contents</Name>

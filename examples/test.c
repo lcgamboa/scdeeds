@@ -1,6 +1,6 @@
 
 //#include <def1.h>
-#include <file.c>
+//#include <file.c>
 
 #asm
 	ORG 00038h

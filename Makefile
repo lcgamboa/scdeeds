@@ -2,7 +2,7 @@ CC = g++
 
 #lxrad automatic generated block start, don't edit below!
 
-FLAGS = -Wall -O2 `lxrad-config --cxxflags`
+FLAGS = -D_VERSION_=\"0.1\" -Wall -O2 `lxrad-config --cxxflags`
 
 LIBS = `lxrad-config --libs`  
 
@@ -24,3 +24,4 @@ install:
 
 clean:
 	rm -f scdeeds *.o core
+	rm -f examples/*.asm examples/*.s examples/*.mc8 examples/*.map examples/*.hex

@@ -2,8 +2,7 @@
 #include"scdeeds1.h"
 #include"scdeeds1_d.cc"
 #include<wx/stc/stc.h>
-#include <lxrad/cstyledtext.h>
-#include <lxrad_SDL2/ccontrol.h>
+
 
 
 CPWindow1 Window1;
@@ -13,7 +12,7 @@ CPWindow1 Window1;
 const int ANNOTATION_STYLE = wxSTC_STYLE_LASTPREDEFINED + 1;
 
 void
-CPWindow1::_EvOnCreate (CControl * control)
+CPWindow1::_EvOnCreate(CControl * control)
 {
 
  wxStyledTextCtrl * text = (wxStyledTextCtrl*) styledtext1.GetWidget ();
@@ -58,40 +57,143 @@ CPWindow1::_EvOnCreate (CControl * control)
  P_filename = wxT ("");
  menu1_File_Save.SetEnable (0);
  //TODO ler preferências
+#ifdef _WIN_
+ P_scc8080 = wxT ("scc8080.exe");
+ P_sc2deeds = wxT ("sc2deeds.exe");
+ P_8085asm = wxT ("8085asm.exe");
+ P_DeedsMCE = wxT ("/home/win/Arquivos\\ de\\ programas/DeedsSuite/DeedsMCE.exe");
+#else 
  P_scc8080 = wxT ("../SmallC-85/smallC/scc8080");
  P_sc2deeds = wxT ("sc2deeds/sc2deeds");
  P_8085asm = wxT ("../8085asm/8085asm");
- P_DeedsMCE = wxT ("wine /home/win/Arquivos\\ de\\ programas/DeedsSuite/DeedsMCE.exe");
+ P_DeedsMCE = wxT ("/home/win/Arquivos\\ de\\ programas/DeedsSuite/DeedsMCE.exe");
+#endif
+
+ char home[1024];
+ strncpy (home, (char*) lxGetUserDataDir (_T ("scdeeds")).char_str (), 1023);
+ Configure (control, home);
+
 }
 
 void
-CPWindow1::_EvOnShow (CControl * control)
+CPWindow1::Configure(CControl * control, const char * home)
+{
+
+ char line[1024];
+ char fname[1024];
+
+ char *name;
+ char *value;
+ int lc;
+
+ // String status;
+
+ snprintf (fname, 1023, "%s/scdeeds.ini", home);
+
+
+ prefs.Clear ();
+ if (lxFileExists (fname))
+  {
+   if (prefs.LoadFromFile (fname))
+    {
+     for (lc = 0; lc < (int) prefs.GetLinesCount (); lc++)
+      {
+       strncpy (line, prefs.GetLine (lc).c_str (), 1023);
+
+       name = strtok (line, "\t= ");
+       strtok (NULL, " ");
+       value = strtok (NULL, "\"");
+       if ((name == NULL) || (value == NULL))continue;
+
+       if (!strcmp (name, "deedsmce"))
+        {
+         P_DeedsMCE = String (value, lxConvUTF8);
+        }
+
+
+      }
+    }
+  }
+ else
+  {
+   printf ("Error open config file \"%s\"!\n", fname);
+  }
+}
+
+void
+CPWindow1::_EvOnDestroy(CControl * control)
+{
+ char home[1010];
+ char fname[1110];
+
+ //write options
+ strncpy (home, (char*) lxGetUserDataDir (_T ("scdeeds")).char_str (), 1000);
+
+ lxCreateDir (home);
+
+ snprintf (fname, 1200, "%s/scdeeds.ini", home);
+
+ saveprefs (lxT ("deedsmce"), P_DeedsMCE);
+
+ prefs.SaveToFile (fname);
+
+}
+
+void
+CPWindow1::saveprefs(String name, String value)
+{
+ char line[1024];
+ char *pname;
+ char *pvalue;
+
+ for (int lc = 0; lc < (int) prefs.GetLinesCount (); lc++)
+  {
+   strncpy (line, prefs.GetLine (lc).c_str (), 1023);
+
+   pname = strtok (line, "\t= ");
+   strtok (NULL, " ");
+   pvalue = strtok (NULL, "\"");
+
+   if ((pname == NULL) || (pvalue == NULL))continue;
+
+   if (String (pname) == name)
+    {
+     prefs.SetLine (name + lxT ("\t= \"") + value + lxT ("\""), lc);
+
+     return;
+    }
+  }
+ prefs.AddLine (name + lxT ("\t= \"") + value + lxT ("\""));
+}
+
+void
+CPWindow1::_EvOnShow(CControl * control)
 {
  styledtext1.SetWidth (GetWidth () - 20);
  styledtext1.SetHeight (GetHeight () - 70);
 }
 
 void
-CPWindow1::menu1_File_Open_EvMenuActive (CControl * control)
+CPWindow1::menu1_File_Open_EvMenuActive(CControl * control)
 {
  filedialog1.SetType (lxFD_OPEN | lxFD_CHANGE_DIR);
  filedialog1.Run ();
 }
 
 void
-CPWindow1::menu1_File_Save_EvMenuActive (CControl * control)
+CPWindow1::menu1_File_Save_EvMenuActive(CControl * control)
 {
  styledtext1.SaveToFile (P_filename);
 }
 
 void
-CPWindow1::menu1_File_Exit_EvMenuActive (CControl * control)
+CPWindow1::menu1_File_Exit_EvMenuActive(CControl * control)
 {
  WDestroy ();
 }
 
 void
-CPWindow1::menu1_Build_Compile_EvMenuActive (CControl * control)
+CPWindow1::menu1_Build_Compile_EvMenuActive(CControl * control)
 {
 
  if (P_filename.size () == 0)
@@ -166,6 +268,9 @@ CPWindow1::menu1_Build_Compile_EvMenuActive (CControl * control)
        int lineno = atoi (line) - 1;
 
        text->AnnotationSetText (lineno, text->AnnotationGetText (lineno) + resto + wxT ("\n"));
+       text->AnnotationSetText (lineno, text->AnnotationGetText (lineno) + result.Item (++i) + wxT ("\n"));
+       text->AnnotationSetText (lineno, text->AnnotationGetText (lineno) + result.Item (++i) + wxT ("\n"));
+
        text->AnnotationSetStyle (lineno, ANNOTATION_STYLE);
        printf ("%s\n", (const char *) result.Item (i));
       }
@@ -183,7 +288,7 @@ CPWindow1::menu1_Build_Compile_EvMenuActive (CControl * control)
 }
 
 void
-CPWindow1::menu1_Build_RuninDeeds_EvMenuActive (CControl * control)
+CPWindow1::menu1_Build_RuninDeeds_EvMenuActive(CControl * control)
 {
 
  if (P_filename.size () == 0)
@@ -196,8 +301,12 @@ CPWindow1::menu1_Build_RuninDeeds_EvMenuActive (CControl * control)
 
  if (lxFileExists (fname))
   {
+#ifdef _WIN_
    String cmd = P_DeedsMCE + wxT (" ") + fname;
-
+#else
+   String cmd = wxT ("wine \"")+P_DeedsMCE + wxT ("\" ") + fname;
+#endif
+   
    printf ("cmd=[%s]\n", (const char *) cmd.c_str ());
    lxExecute (cmd);
   }
@@ -208,7 +317,7 @@ CPWindow1::menu1_Build_RuninDeeds_EvMenuActive (CControl * control)
 }
 
 void
-CPWindow1::filedialog1_EvOnClose (const int retId)
+CPWindow1::filedialog1_EvOnClose(const int retId)
 {
  if (retId && (filedialog1.GetType () == (lxFD_SAVE | lxFD_CHANGE_DIR)))
   {
@@ -223,39 +332,54 @@ CPWindow1::filedialog1_EvOnClose (const int retId)
    menu1_File_Save.SetEnable (1);
   }
 
- if (retId && (filedialog1.GetType () == (lxFD_OPEN | lxFD_CHANGE_DIR)))
+ if (filedialog1.GetType () == (lxFD_OPEN | lxFD_CHANGE_DIR))
   {
-   wxStyledTextCtrl * text = (wxStyledTextCtrl*) styledtext1.GetWidget ();
-   text->ClearAll ();
-   P_filename = filedialog1.GetFileName ();
-   styledtext1.LoadFromFile (P_filename);
-   menu1_File_Save.SetEnable (1);
+   if (OFilter.size () > 0)
+    {
+     if (retId)
+      {
+       P_DeedsMCE = filedialog1.GetFileName ();
+      }
+     filedialog1.SetFilter (OFilter);
+     filedialog1.SetFileName (OFilename);
+     OFilter = lxT ("");
+     OFilename = lxT ("");
+    }
+   else if (retId)
+    {
+     wxStyledTextCtrl * text = (wxStyledTextCtrl*) styledtext1.GetWidget ();
+     text->ClearAll ();
+     P_filename = filedialog1.GetFileName ();
+     styledtext1.LoadFromFile (P_filename);
+     menu1_File_Save.SetEnable (1);
+    }
   }
 }
 
 void
-CPWindow1::menu1_File_SaveAs_EvMenuActive (CControl * control)
+CPWindow1::menu1_File_SaveAs_EvMenuActive(CControl * control)
 {
  filedialog1.SetType (lxFD_SAVE | lxFD_CHANGE_DIR);
  filedialog1.Run ();
 }
 
 void
-CPWindow1::menu1_Help_Examples_EvMenuActive (CControl * control)
+CPWindow1::menu1_Help_Examples_EvMenuActive(CControl * control)
 {
- //code here:)
- mprint (wxT ("menu1_Help_Examples_EvMenuActive\n"));
+ filedialog1.SetType (lxFD_OPEN | lxFD_CHANGE_DIR);
+ filedialog1.SetFileName (dirname (lxGetExecutablePath ())+lxT("examples/blink.c"));
+ filedialog1.Run ();
 }
 
 void
-CPWindow1::menu1_Help_About_EvMenuActive (CControl * control)
+CPWindow1::menu1_Help_About_EvMenuActive(CControl * control)
 {
- //code here:)
- mprint (wxT ("menu1_Help_About_EvMenuActive\n"));
+ Message (lxT ("Developed by L.C. Gamboa\n <lcgamboa@yahoo.com>\n Version: ") + String (lxT (_VERSION_)));
+
 }
 
 void
-CPWindow1::menu1_File_New_EvMenuActive (CControl * control)
+CPWindow1::menu1_File_New_EvMenuActive(CControl * control)
 {
  wxStyledTextCtrl * text = (wxStyledTextCtrl*) styledtext1.GetWidget ();
  if (text->GetLineCount () > 1)
@@ -270,8 +394,23 @@ CPWindow1::menu1_File_New_EvMenuActive (CControl * control)
 }
 
 void
-CPWindow1::menu1_Help_Contents_EvMenuActive (CControl * control)
+CPWindow1::menu1_Help_Contents_EvMenuActive(CControl * control)
 {
  //code here:)
  mprint (wxT ("menu1_Help_Contents_EvMenuActive\n"));
 }
+
+void
+CPWindow1::menu1_Options_McEPath_EvMenuActive(CControl * control)
+{
+ filedialog1.SetType (lxFD_OPEN | lxFD_CHANGE_DIR);
+
+ OFilter = filedialog1.GetFilter ();
+ OFilename = filedialog1.GetFileName ();
+ filedialog1.SetFilter (wxT ("DeedsMcE (*.exe)|*.exe;*.EXE;"));
+ filedialog1.SetFileName (P_DeedsMCE);
+
+ filedialog1.Run ();
+}
+
+

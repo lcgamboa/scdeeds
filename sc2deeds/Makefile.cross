@@ -1,0 +1,9 @@
+CC = x86_64-w64-mingw32-g++
+
+FLAGS= -Wall -O2
+
+all:
+	$(CC) $(FLAGS) sc2deeds.c -o sc2deeds.exe
+
+clean:
+	rm -Rf sc2deeds.exe
