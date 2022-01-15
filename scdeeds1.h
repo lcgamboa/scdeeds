@@ -48,19 +48,19 @@ class CPWindow1:public CPWindow
   CPWindow1(void);
 //lxrad automatic generated block end, don't edit above!
   
-  void saveprefs(String name, String value);
+  void saveprefs(lxString name, lxString value);
   void Configure(CControl * control, const char * home);
   
-  String P_DeedsMCE;
-  String P_scc8080;
-  String P_8085asm;
-  String P_sc2deeds;
-  String P_filename;
+  lxString P_DeedsMCE;
+  lxString P_scc8080;
+  lxString P_8085asm;
+  lxString P_sc2deeds;
+  lxString P_filename;
   
-  String OFilter;
-  String OFilename;        
+  lxString OFilter;
+  lxString OFilename;        
   
-  CStringList prefs;
+  lxStringList prefs;
 };
 
 extern CPWindow1 Window1 ;

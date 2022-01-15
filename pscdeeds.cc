@@ -1,4 +1,4 @@
-#include<lxrad.h>
+
 #include"scdeeds1.h"
 
 //Program____________________________________________________________
@@ -10,5 +10,4 @@ Initialize
   Application->Load ();
 
   return 0;
-};
-
+}

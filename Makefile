@@ -2,9 +2,9 @@ CC = g++
 
 #lxrad automatic generated block start, don't edit below!
 
-FLAGS = -D_VERSION_=\"0.1\" -Wall -O2 `lxrad-config --cxxflags`
+FLAGS = -D_VERSION_=\"0.0.1\" -Wall -O2 -ggdb `lxrad-config --cxxflags`
 
-LIBS = `lxrad-config --libs`  
+LIBS = `lxrad-config --libs` `wx-config  --libs stc`  
 
 OBJS = pscdeeds.o scdeeds1.o  
 
